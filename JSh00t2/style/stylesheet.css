@@ -1,0 +1,9 @@
+html{
+    background-color:black;
+}
+#canvas{
+    margin : 0 auto;
+    border:3px solid lightgrey;
+    background-color:black;
+     border-radius: 8px;
+    }
