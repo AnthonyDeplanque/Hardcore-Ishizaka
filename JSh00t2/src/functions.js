@@ -1,7 +1,5 @@
-function keyboardDown(e) { 
-    //key pressed.  
-    
-    //console.log(e.keyCode);
+function keyboardDown(e) {
+    //key pressed.   
     switch (e.keyCode) {
         case (37)://left
             key.left = true;
@@ -20,7 +18,7 @@ function keyboardDown(e) {
             break;
     }
 }
-function keyboardUp(e) { 
+function keyboardUp(e) {
     //key unpressed.  
 
     switch (e.keyCode) {
@@ -41,7 +39,7 @@ function keyboardUp(e) {
             break;
     }
 }
-function isColliding(a, b) { 
+function isColliding(a, b) {
     //returning if a is colliding with b
     let r = false;
     if ((a.x >= b.x && a.x <= b.x + b.xSize) || (a.x + a.xSize >= b.x && a.x + a.xSize <= b.x + b.xSize)) {
