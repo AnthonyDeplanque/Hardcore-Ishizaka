@@ -73,6 +73,6 @@ function gameLoop(timeStamp) {
     heroTouched();
     scoreShow();
     livesShow();
-    explosionShow();
+    explosionDisplay();
     window.requestAnimationFrame(gameLoop);
 }
