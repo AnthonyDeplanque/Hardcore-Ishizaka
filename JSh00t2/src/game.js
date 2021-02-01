@@ -53,8 +53,8 @@ function enemyShot() {
                     if (enemy[i].xSpeed < 50) {
                         enemy[i].xSpeed++;
                     }
-                    if (enemy[i].ySpeed < 5) {
-                        enemy[i].ySpeed++;
+                    if (enemy[i].ySpeed < 3) {
+                        enemy[i].ySpeed+=0.2;
                     }
                     bulletFired[j].shot = false;
                 }
