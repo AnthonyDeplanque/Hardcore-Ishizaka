@@ -1,3 +1,8 @@
+// each classes contain a function called draw and update
+// draw show the object on the canvas
+// update is updating each parameters of the object
+// We have to call each function in our gameLoop
+
 class Keyboard {
     constructor(left, right, up, down, space) {
         this.left = false;
@@ -37,7 +42,7 @@ class EnemyShip {
         this.xSize = 40;
         this.ySize = 40;
         this.img = imgBad;
-        this.xSpeed = 0;
+        this.xSpeed = 10;
         this.ySpeed = 1;
         this.yDirection = randomize(5, 15);
         this.xUpdate = randomize(1, 5);
@@ -52,8 +57,8 @@ class EnemyShip {
             this.y = 0 - this.ySize;
             this.x = randomize(50, canvas.width - 50)
         }
-        this.x += this.xUpdate;
-        this.xUpdate += this.xDirection;
+        this.x += this.xUpdate *this.xSpeed/10;
+        this.xUpdate += this.xDirection ;
         if (this.xUpdate > 5) {
             this.xUpdate = 5;
             this.xDirection *= -1;
@@ -78,7 +83,7 @@ class Stars {
     draw() {
         context.fillStyle = this.color;
         context.beginPath();
-        context.arc(this.x + this.size, this.y + this.size, this.size, 0, Math.PI * 2)
+        context.arc(this.x + this.size, this.y + this.size, this.size / 2, 0, Math.PI * 2)
         context.fill();
         context.closePath();
     }
@@ -101,10 +106,10 @@ class Bullet {
     }
     draw() {
         context.fillStyle = "red";
-        context.fillRect(this.x, this.y, this.sizeX, this.sizeY);
+        context.fillRect(this.x, this.y, this.xSize, this.ySize);
     }
     update() {
-        this.y -= this.speed;
-        if(this.y<0){this.shot=false;}
+        if (this.shot) { this.y -= this.speed; }
+        if (this.y < 0) { this.shot = false; }
     }
 }
