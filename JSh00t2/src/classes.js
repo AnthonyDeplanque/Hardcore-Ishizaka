@@ -49,7 +49,7 @@ class EnemyShip {
         this.xDirection = 0.5;
     }
     draw() {
-        context.drawImage(this.img, this.x - this.xSize / 2, this.y - this.ySize / 2);
+        context.drawImage(this.img, this.x, this.y);
     }
     update() {
         this.y = this.y + (this.yDirection / 5 * this.ySpeed);
