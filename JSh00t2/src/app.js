@@ -1,8 +1,8 @@
-//***********************************
-// JavaScript Shooter By SETEEMIO
-//
-//
-//
+//*****************************************//
+//                                         //
+//     JavaScript Shooter By SETEEMIO      //
+//                                         //
+//*****************************************//
 
 "use strict";
 let canvas;
@@ -14,14 +14,17 @@ let imgBad = new Image();
 imgGood.src = "img/heros.png";
 imgBad.src = "img/enemy.png";
 
-
 let key = new Keyboard;
 let hero = new Ship(300, 400);
 let bulletFired = [];
-let maxBullet = 3;
-let enemyTest = [];
+let maxBullet = 4;
+let shotToggle = false;
+for (let i=0; i<maxBullet;++i){
+    bulletFired[i] = new Bullet();
+}
+let enemy = [];
 for (let i = 0; i < 5; ++i) {
-    enemyTest[i] = new EnemyShip(randomize(50, canvas.width - 50), 0);
+    enemy[i] = new EnemyShip(randomize(50, canvas.width - 50), 0);
 }
 let starDust = [];
 for (let i = 0; i < randomize(200, 255); ++i) {
@@ -39,9 +42,7 @@ function gameLoop(timeStamp) {
     clearCanvas();
     starsDisplay();
     enemyDisplay();
+    isShooting();
     heroDisplay();
-    shootDisplay();  
     window.requestAnimationFrame(gameLoop);
 }
-
-
