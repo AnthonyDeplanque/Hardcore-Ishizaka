@@ -30,6 +30,10 @@ let starDust = [];
 for (let i = 0; i < randomize(200, 255); ++i) {
     starDust[i] = new Stars(randomize(1, canvas.width), randomize(1, canvas.height));
 }
+
+let lives = 3;
+let gameOn = false;
+
 function init() {
     // Get a reference to the canvas
     canvas = document.getElementById('canvas');
@@ -44,5 +48,6 @@ function gameLoop(timeStamp) {
     enemyDisplay();
     isShooting();
     heroDisplay();
+    enemyShot();
     window.requestAnimationFrame(gameLoop);
 }
