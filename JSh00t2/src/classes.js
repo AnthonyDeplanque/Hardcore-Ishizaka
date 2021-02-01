@@ -25,6 +25,7 @@ class Ship {
         context.drawImage(this.img, this.x, this.y);
     }
     update() {
+
         if (key.left) { this.x -= this.speed; }
         if (key.right) { this.x += this.speed; }
         if (key.up) { this.y -= this.speed; }
@@ -35,6 +36,7 @@ class Ship {
         if (this.y > canvas.height - this.ySize) { this.y = canvas.height - this.ySize; }
     }
 }
+
 class EnemyShip {
     constructor(x, y, xSize, ySize, img, xSpeed, ySpeed, xUpdate, xDirection, yDirection) {
         this.x = x;
@@ -57,8 +59,8 @@ class EnemyShip {
             this.y = 0 - this.ySize;
             this.x = randomize(50, canvas.width - 50)
         }
-        this.x += this.xUpdate *this.xSpeed/10;
-        this.xUpdate += this.xDirection ;
+        this.x += this.xUpdate * this.xSpeed / 10;
+        this.xUpdate += this.xDirection;
         if (this.xUpdate > 5) {
             this.xUpdate = 5;
             this.xDirection *= -1;
@@ -111,5 +113,41 @@ class Bullet {
     update() {
         if (this.shot) { this.y -= this.speed; }
         if (this.y < 0) { this.shot = false; }
+    }
+}
+class Fireball {
+    constructor(x, y, size, maxSize, direction, exist, colorR, colorG, colorB, color) {
+        this.x = x;
+        this.y = y;
+        this.size = 1;
+        this.maxSize = 40;
+        this.direction = 1;
+        this.exist = false;
+        this.colorR = randomize(200, 255);
+        this.colorG = randomize(150, 255);
+        this.colorB = 0;
+        this.color = 'rgba(' + this.colorR + ',' + this.colorG + ',' + this.colorB + ',0.8)';
+    }
+    draw() {
+        context.fillStyle = this.color;
+        context.beginPath();
+        context.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+        context.fill();
+        context.closePath();
+    }
+    update() {
+        this.colorR = randomize(200, 255);
+        this.colorG = randomize(150, 255);
+        this.color = 'rgba(' + this.colorR + ',' + this.colorG + ',' + this.colorB + ',0.8)';
+        this.size += this.direction;
+        this.y +=0.5;
+        if (this.size == this.maxSize) { this.direction *= -1; }
+        if (this.size < 0) {
+            this.exist = false;
+            this.x = 0;
+            this.y = 0;
+            this.direction = 1;
+            this.size = 1;
+        }
     }
 }
