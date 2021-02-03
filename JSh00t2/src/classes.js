@@ -47,7 +47,7 @@ class EnemyShip {
         this.img = imgBad;
         this.xSpeed = 10;
         this.ySpeed = 1;
-        this.yDirection = randomize(5, 15);
+        this.yDirection = randomize(3, 9);
         this.xUpdate = randomize(1, 5);
         this.xDirection = 0.5;
     }
@@ -99,13 +99,14 @@ class Stars {
     }
 }
 class Bullet {
-    constructor(x, y, xSize, ySize, speed, shot) {
+    constructor(x, y, xSize, ySize, speed, shot, snd) {
         this.x = x;
         this.y = y;
         this.xSize = 4;
         this.ySize = 30;
         this.speed = 10;
         this.shot = false;
+        this.snd = new Sound("snd/laser.wav");
     }
     draw() {
         context.fillStyle = "red";
@@ -117,7 +118,7 @@ class Bullet {
     }
 }
 class Fireball {
-    constructor(x, y, size, maxSize, direction, exist, colorR, colorG, colorB, color) {
+    constructor(x, y, size, maxSize, direction, exist, colorR, colorG, colorB, color, snd) {
         this.x = x;
         this.y = y;
         this.size = 1;
@@ -128,6 +129,7 @@ class Fireball {
         this.colorG = randomize(150, 255);
         this.colorB = 0;
         this.color = 'rgba(' + this.colorR + ',' + this.colorG + ',' + this.colorB + ',0.8)';
+        this.snd = new Sound("snd/boom.wav");
     }
     draw() {
         context.fillStyle = this.color;
@@ -173,6 +175,5 @@ class Text {
             this.textOutput += this.str[this.iterator];
             ++this.iterator;
         }
-
     }
 }
