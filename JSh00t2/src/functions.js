@@ -21,7 +21,6 @@ function keyboardDown(e) {
             break;
     }
 }
-
 function keyboardUp(e) {
     //key unpressed.  
     switch (e.keyCode) {
@@ -45,7 +44,6 @@ function keyboardUp(e) {
             break;
     }
 }
-
 function isColliding(a, b) {
     //returning if a is colliding with b
     let r = false;
@@ -56,13 +54,30 @@ function isColliding(a, b) {
     }
     return r;
 }
-
 function randomize(a, b) {
     //returning a random integer between a and b
     return Math.trunc((Math.random() * (b - a)) + a);
 }
-
 function clearCanvas() {
     //cleaning the canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
+}
+function debugText(char, variable, y) {
+    context.font = '12px Arial';
+    context.fillStyle = '#fff';
+    context.fillText(char + " = " + variable, 25, y);
+}
+function Sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function () {
+        this.sound.play();
+    }
+    this.stop = function () {
+        this.sound.pause();
+    }
 }
