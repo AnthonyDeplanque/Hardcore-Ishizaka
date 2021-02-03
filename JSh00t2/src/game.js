@@ -1,21 +1,24 @@
-function starsDisplay() { 
+function starsDisplay() {
     for (let i = 0; i < starDust.length; ++i) {
         starDust[i].draw();
         starDust[i].update();
     }
 }
+
 function enemyDisplay() {
     for (let i = 0; i < enemy.length; ++i) {
         enemy[i].draw();
         enemy[i].update();
     }
 }
+
 function heroDisplay() {
     if (blink === false) {
         hero.draw();
         hero.update();
     }
 }
+
 function shootDisplay() {
     for (let i = 0; i < bulletFired.length; ++i) {
         if (bulletFired[i].shot) {
@@ -24,12 +27,13 @@ function shootDisplay() {
         }
     }
 }
+
 function isShooting() {
     shootDisplay();
     if (key.space) {
         if (shotToggle == false) {
             shotToggle = true;
-            console.log('shot!');
+            //            console.log('shot!');
             for (let i = 0; i < bulletFired.length; ++i) {
                 if (bulletFired[i].shot === false) {
                     bulletFired[i].x = (hero.x + (hero.xSize / 2) - (bulletFired[i].xSize / 2));
@@ -38,12 +42,13 @@ function isShooting() {
                     break;
                 }
             }
-            window.setTimeout(function () {
+            window.setTimeout(function() {
                 shotToggle = false;
             }, 200);
         }
     }
 }
+
 function enemyShot() {
     for (let i = 0; i < enemy.length; ++i) {
         for (let j = 0; j < bulletFired.length; ++j) {
@@ -72,6 +77,7 @@ function enemyShot() {
         }
     }
 }
+
 function heroTouched() {
     for (let i = 0; i < enemy.length; ++i) {
         if (isColliding(hero, enemy[i])) {
@@ -82,7 +88,7 @@ function heroTouched() {
             hero.x = -100000;
             hero.y = -100000;
             if (lives > 0) {
-                window.setTimeout(function () {
+                window.setTimeout(function() {
                     blink = false;
                     hero.x = initX;
                     hero.y = initY;
@@ -98,16 +104,19 @@ function heroTouched() {
         }
     }
 }
+
 function scoreShow() {
     context.font = '16px Arial';
     context.fillStyle = '#fff';
     context.fillText('Score = ' + score, canvas.width - 150, 20);
 }
+
 function livesShow() {
     context.font = '16px Arial';
     context.fillStyle = '#fff';
     context.fillText('Lives = ' + lives, canvas.width - 150, canvas.height - 20);
 }
+
 function explosionDisplay() {
     for (let i = 0; i < explosion.length; ++i) {
         if (explosion[i].exist) {
@@ -116,6 +125,7 @@ function explosionDisplay() {
         }
     }
 }
+
 function explosionShow(param) {
     for (let i = 0; i < explosion.length; ++i) {
         if (explosion[i].exist === false) {
@@ -126,8 +136,14 @@ function explosionShow(param) {
         }
     }
 }
+
 function timerBegin() {
-    window.setTimeout(function () {
+    window.setTimeout(function() {
         timerForBegin = true;
     }, 2000);
+}
+
+function toggleKey(keyPressed, bool) {
+    if (keyPressed == true && bool == false) { bool = true; }
+    return bool;
 }

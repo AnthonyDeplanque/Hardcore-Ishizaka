@@ -27,7 +27,8 @@ let blink = false; //toggle to know if the hero is colliding with an enemy or no
 
 let key = new Keyboard; //toggle to know what key you are pressing
 let hero = new Ship(initX, initY); //the player's spaceShip
-
+let begin1 = new Text("Shooter Game", 40, "white", canvas.width / 3, canvas.height / 2);
+let begin2 = new Text("Press Enter to play", 40, "white", canvas.width / 3, (canvas.height / 2) + 40);
 let bulletFired = []; //array for the bullets fired
 for (let i = 0; i < maxBullet; ++i) {
     bulletFired[i] = new Bullet();
@@ -62,9 +63,23 @@ function init() {
     document.addEventListener("keydown", keyboardDown);
     document.addEventListener("keyup", keyboardUp);
 }
+
 function gameLoop(timeStamp) {
-    timerBegin();
     clearCanvas();
+    gameOn = toggleKey(key.enter, gameOn);
+    if (gameOn) { gameIsOn(); } else {
+        begin1.draw();
+        begin2.draw();
+        window.setInterval(function() {
+            begin1.update();
+            begin2.update()
+        }, 100);
+    }
+    window.requestAnimationFrame(gameLoop);
+}
+
+function gameIsOn() {
+    timerBegin();
     starsDisplay();
     if (timerForBegin) { enemyDisplay(); }
     isShooting();
@@ -74,5 +89,4 @@ function gameLoop(timeStamp) {
     scoreShow();
     livesShow();
     explosionDisplay();
-    window.requestAnimationFrame(gameLoop);
 }

@@ -4,12 +4,13 @@
 // We have to call each function in our gameLoop
 
 class Keyboard {
-    constructor(left, right, up, down, space) {
+    constructor(left, right, up, down, space, enter) {
         this.left = false;
         this.right = false;
         this.up = false;
         this.down = false;
         this.space = false;
+        this.enter = false;
     }
 }
 class Ship {
@@ -140,7 +141,7 @@ class Fireball {
         this.colorG = randomize(150, 255);
         this.color = 'rgba(' + this.colorR + ',' + this.colorG + ',' + this.colorB + ',0.8)';
         this.size += this.direction;
-        this.y +=0.5;
+        this.y += 0.5;
         if (this.size == this.maxSize) { this.direction *= -1; }
         if (this.size < 0) {
             this.exist = false;
@@ -149,5 +150,29 @@ class Fireball {
             this.direction = 1;
             this.size = 1;
         }
+    }
+}
+class Text {
+    constructor(message, size, color, x, y, str, iterator, textOutput) {
+        this.message = message;
+        this.size = size;
+        this.color = color;
+        this.x = x;
+        this.y = y;
+        this.str = message.split("");
+        this.iterator = 0;
+        this.textOutput = "";
+    }
+    draw() {
+        context.font = this.size + 'px Arial';
+        context.fillStyle = this.color;
+        context.fillText(this.textOutput, this.x, this.y);
+    }
+    update() {
+        if (this.iterator < this.str.length) {
+            this.textOutput += this.str[this.iterator];
+            ++this.iterator;
+        }
+
     }
 }

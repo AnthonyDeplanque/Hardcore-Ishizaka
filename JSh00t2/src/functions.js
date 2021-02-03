@@ -1,16 +1,19 @@
 function keyboardDown(e) {
     //key pressed.   
     switch (e.keyCode) {
-        case (37)://left
+        case (13): //enter
+            key.enter = true;
+            break;
+        case (37): //left
             key.left = true;
             break;
-        case (39)://right
+        case (39): //right
             key.right = true;
             break;
-        case (38)://up
+        case (38): //up
             key.up = true;
             break;
-        case (40)://down
+        case (40): //down
             key.down = true;
             break;
         case (32):
@@ -18,20 +21,23 @@ function keyboardDown(e) {
             break;
     }
 }
+
 function keyboardUp(e) {
     //key unpressed.  
-
     switch (e.keyCode) {
-        case (37)://left
+        case (13): //enter
+            key.enter = false;
+            break;
+        case (37): //left
             key.left = false;
             break;
-        case (39)://right
+        case (39): //right
             key.right = false;
             break;
-        case (38)://up
+        case (38): //up
             key.up = false;
             break;
-        case (40)://down
+        case (40): //down
             key.down = false;
             break;
         case (32):
@@ -39,6 +45,7 @@ function keyboardUp(e) {
             break;
     }
 }
+
 function isColliding(a, b) {
     //returning if a is colliding with b
     let r = false;
@@ -49,10 +56,12 @@ function isColliding(a, b) {
     }
     return r;
 }
+
 function randomize(a, b) {
     //returning a random integer between a and b
     return Math.trunc((Math.random() * (b - a)) + a);
 }
+
 function clearCanvas() {
     //cleaning the canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
