@@ -12,10 +12,10 @@ window.onload = init();
 const imgGood = new Image();
 const imgBad = new Image();
 const imgBoss = new Image();
-imgGood.src = "img/ship_hero.png";
-imgBad.src = "img/ship_enemy.png";
+imgGood.src = "img/Ship_hero.png";
+imgBad.src = "img/Ship_enemy.png";
 //boss 245*149;
-imgBoss.src = "img/ship_boss.png";
+imgBoss.src = "img/Ship_boss.png";
 
 let xEnemyCreation = new Position();
 let bossLife = 60;
@@ -39,7 +39,7 @@ let blink = false; //toggle to know if the hero is colliding with an enemy or no
 
 let key = new Keyboard; //toggle to know what key you are pressing
 let hero = new Ship(initX, initY); //the player's spaceShip
-const begin1 = new Text("Shooter Game", 40, "white", canvas.width / 3, canvas.height / 2);
+const begin1 = new Text("HardCore Ishizaka", 40, "white", canvas.width / 3, canvas.height / 2);
 const begin2 = new Text("Press Enter to play", 40, "white", canvas.width / 3, (canvas.height / 2) + 40);
 const gameover1 = new Text("Game Over", 40, "white", canvas.width / 3, canvas.height / 2);
 let gameover2 = new Text("", 40, "white", canvas.width / 3, (canvas.height / 2) + 40);
