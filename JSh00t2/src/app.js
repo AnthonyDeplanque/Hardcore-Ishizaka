@@ -3,37 +3,39 @@
 //     JavaScript Shooter By SETEEMIO      //
 //                                         //
 //*****************************************//
-
 "use strict";
 let canvas;
 let context;
+let stamp = 0;
+let limit = 75;
 window.onload = init();
-
 const imgGood = new Image();
 const imgBad = new Image();
-imgGood.src = "img/heros.png";
-imgBad.src = "img/enemy.png";
+const imgBoss = new Image();
+imgGood.src = "img/ship_hero.png";
+imgBad.src = "img/ship_enemy.png";
+//boss 245*149;
+imgBoss.src = "img/ship_boss.png";
 
-
-//initial position of the hero's ship
-const initX = canvas.width / 2;
-const initY = (canvas.height / 4) * 3;
-
-let maxBullet = 4;
+let xEnemyCreation = new Position();
+let bossLife = 60;
+const initX = canvas.width / 2; // Initial position of the hero's ship (x)
+const initY = (canvas.height / 4) * 3; // Initial position of the hero's ship (y)
+let maxBullet = 3;
 let maxEnemies = 5;
-let shotToggle = false; //toggle to know if the player is firing or not
-
-let gameOn = false; //toggle to know if the game is on or not
-let blink = false; //toggle to know if the hero is colliding with an enemy or not
-
 let lives = 3;
 let score = 0;
 let scoreForLives = 0; // score to get an extra life
 let multiplier = 1;
 let kills = 0;
 let killForRun = 0;
+
 let timerForBegin = false; // boolean to set the beginning of the enemy swarm
-let gameOverKill = new String();
+let shotToggle = false; //toggle to know if the player is firing or not
+let bossShotToggle = false;
+let bossDisplayToggle = false;
+let gameOn = false; //toggle to know if the game is on or not
+let blink = false; //toggle to know if the hero is colliding with an enemy or not
 
 let key = new Keyboard; //toggle to know what key you are pressing
 let hero = new Ship(initX, initY); //the player's spaceShip
@@ -47,9 +49,15 @@ let bulletFired = []; //array for the bullets fired
 for (let i = 0; i < maxBullet; ++i) {
     bulletFired[i] = new Bullet();
 }
+let bulletBoss = [];
+for (let i = 0; i < maxBullet * 2; ++i) {
+    bulletBoss[i] = new Bullet();
+    bulletBoss[i].speed *= -0.5;
+}
+let boss = new BossShip(245, 149, imgBoss, bossLife);
 let enemy = []; //array for the enemies
 for (let i = 0; i < maxEnemies; ++i) {
-    enemy[i] = new EnemyShip(randomize(50, canvas.width - 50), 0);
+    enemy[i] = new EnemyShip(randomize(limit, canvas.width - limit), 0, 29, 30, imgBad);
 }
 let starDust = []; //array for the stars in the background
 for (let i = 0; i < randomize(200, 255); ++i) {
@@ -68,32 +76,38 @@ function init() {
     document.addEventListener("keyup", keyboardUp);
 }
 function gameLoop(timeStamp) {
+    ++stamp;
     clearCanvas();
     gameOn = toggleKey(key.enter, gameOn);
-    if (gameOn) { gameIsOn(); } else {
+    if (gameOn) {
+        gameIsOn();
+    } else {
         beginDisplay();
     }
     window.requestAnimationFrame(gameLoop);
 }
 function gameIsOn() {
-    timerBegin();
+    callOfTheBoss();
     starsDisplay();
-    if (timerForBegin) { 
-        enemyDisplay(); 
-    }
-    isShooting();
-    heroDisplay();
-    enemyShot();
-    heroTouched();
     scoreShow();
     livesShow();
-//    debugText("killForRun",killForRun,10);
-//    debugText("kills",kills,30);
-//    debugText("multiplier",multiplier,50);
-//    debugText("scoreForLives",scoreForLives,70);
+    xEnemyCreation.update();
+    heroIsShooting();
+    heroDisplay();
+    heroTouched();
+    if (bossDisplayToggle) {
+        bossDisplay();
+    }
+    else {
+        timerBegin();
+        enemyShot();
+    }
+    if (timerForBegin) {
+        enemyDisplay();
+    }
+    explosionDisplay();
     if (lives == 0) {
         gameoverDisplay();
         if (key.enter) { window.location.reload(); }
     }
-    explosionDisplay();
 }
