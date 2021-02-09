@@ -1,8 +1,27 @@
-// each classes contain a function called draw and update
+// each visual object classes contain functions called draw and update
 // draw show the object on the canvas
 // update is updating each parameters of the object
-// We have to call each function in our gameLoop
-
+// We have to call each functions in our gameLoop functionS
+class Position {
+    constructor(x, xDirection) {
+        this.x = limit;
+        this.xDirection = 1;
+    } draw() {
+        context.fillStyle = 'red';
+        context.fillRect(this.x, limit, 3, 3);
+    }
+    update() {
+        this.x += this.xDirection;
+        if (this.x < limit) {
+            this.x = limit;
+            this.xDirection *= -1;
+        }
+        if (this.x > (canvas.width - limit)) {
+            this.x = (canvas.width - limit);
+            this.xDirection *= -1;
+        }
+    }
+}
 class Keyboard {
     constructor(left, right, up, down, space, enter) {
         this.left = false;
@@ -17,8 +36,8 @@ class Ship {
     constructor(x, y, xSize, ySize, img, speed) {
         this.x = x;
         this.y = y;
-        this.xSize = 40;
-        this.ySize = 40;
+        this.xSize = 31;
+        this.ySize = 31;
         this.img = imgGood;
         this.speed = 4;
     }
@@ -26,7 +45,6 @@ class Ship {
         context.drawImage(this.img, this.x, this.y);
     }
     update() {
-
         if (key.left) { this.x -= this.speed; }
         if (key.right) { this.x += this.speed; }
         if (key.up) { this.y -= this.speed; }
@@ -37,38 +55,117 @@ class Ship {
         if (this.y > canvas.height - this.ySize) { this.y = canvas.height - this.ySize; }
     }
 }
-
 class EnemyShip {
-    constructor(x, y, xSize, ySize, img, xSpeed, ySpeed, xUpdate, xDirection, yDirection) {
+    constructor(x, y, xSize, ySize, img, xSpeed, ySpeed, xUpdate, yUpdate, xDirection, yDirection, pattern) {
         this.x = x;
         this.y = y;
-        this.xSize = 40;
-        this.ySize = 40;
-        this.img = imgBad;
+        this.xSize = xSize;
+        this.ySize = ySize;
+        this.img = img;
         this.xSpeed = 10;
         this.ySpeed = 1;
-        this.yDirection = randomize(3, 9);
         this.xUpdate = randomize(1, 5);
+        this.yUpdate = 0.5;
+        this.yDirection = 0.5;
         this.xDirection = 0.5;
+        this.pattern = randomize(1, 3);
     }
     draw() {
         context.drawImage(this.img, this.x, this.y);
     }
     update() {
-        this.y = this.y + (this.yDirection / 5 * this.ySpeed);
         if (this.y > canvas.height + this.ySize) {
-            this.y = 0 - this.ySize;
-            this.x = randomize(50, canvas.width - 50)
+            if (bossDisplayToggle) {
+                this.y = 0 - this.ySize;
+                this.x = xEnemyCreation.x;
+            }
         }
+        this.y = this.y + (this.yUpdate / 5 * this.ySpeed);
         this.x += this.xUpdate * this.xSpeed / 10;
+        this.yUpdate += this.yDirection;
         this.xUpdate += this.xDirection;
-        if (this.xUpdate > 5) {
-            this.xUpdate = 5;
-            this.xDirection *= -1;
+        if (this.pattern == 1) {
+            patternSinX(this, 5, -5);
+            patternSinY(this, 5, 2);
         }
-        if (this.xUpdate < -5) {
-            this.xUpdate = -5;
-            this.xDirection *= -1;
+        if (this.pattern == 2) {
+            this.ySpeed = 2;
+            patternSinX(this, 1, -1);
+            patternSinY(this, 10, -1);
+        }
+        if (this.pattern == 3) {
+            patternSinX(this, 5, -1)
+            patternSinY(this, 3, -1);
+            this.x += this.xUpdate * this.xSpeed / 15;
+        }
+        if (this.x < 0 || this.x > (canvas.width - this.xSize)) { this.xSpeed *= (-1); }
+    }
+}
+class BossShip {
+    constructor(xSize, ySize, img, life, x, y, xSpeed, ySpeed, xUpdate, yUpdate, xDirection, yDirection, pattern, alive) {
+        this.xSize = xSize;
+        this.ySize = ySize;
+        this.img = img;
+        this.life = life;
+        this.x = (canvas.width / 2) - (this.xSize / 2);
+        this.y = 0 - (this.ySize / 2);
+        this.xSpeed = 10;
+        this.ySpeed = 0.5;
+        this.xUpdate = randomize(1, 5);
+        this.yUpdate = 0.5;
+        this.yDirection = 0.5;
+        this.xDirection = 0.5;
+        this.pattern = false;
+        this.alive = true;
+    } draw() {
+        context.drawImage(this.img, this.x, this.y);
+    }
+    update() {
+        if (this.life > 0) {
+            if (this.alive) {
+                if (this.y > limit) {
+                    this.pattern = true;
+                }
+                if (this.pattern === false) {
+                    this.y += this.ySpeed;
+                }
+                else if (this.pattern) {
+                    this.y = this.y + (this.yUpdate / 5 * this.ySpeed);
+                    this.x += this.xUpdate * this.xSpeed / 10;
+                    this.yUpdate += this.yDirection;
+                    this.xUpdate += this.xDirection;
+                    this.ySpeed = 2;
+                    patternSinX(this, 15, -4);
+                    patternSinY(this, 15, -15);
+                    if (this.x < 0 || this.x > (canvas.width - this.xSize)) { this.xSpeed *= (-1); }
+                    if (this.y < 0 || this.y > (canvas.height - this.ySize)) { this.ySpeed *= (-1); }
+                }
+            }
+
+        } else {
+            this.alive = false;
+        }
+        if (this.alive === false) {
+            this.pattern = false;
+            this.yUpdate = 0.5;
+            this.yDirection = 0.5;
+            this.ySpeed = 1;
+            this.y += this.ySpeed;
+        }
+    }
+    hpDraw() {
+        let hpSize = bossLife;
+        context.fillStyle = "red";
+        context.fillRect(canvas.width / 6
+            , (canvas.height / 6) * 5
+            , ((canvas.width / 6) * 4)
+            , canvas.height / 20);
+        if (this.life >= 0) {
+            context.fillStyle = "green";
+            context.fillRect(canvas.width / 6
+                , (canvas.height / 6) * 5
+                , (((canvas.width / 6) * 4) * this.life) / hpSize
+                , canvas.height / 20);
         }
     }
 }
@@ -104,7 +201,7 @@ class Bullet {
         this.y = y;
         this.xSize = 4;
         this.ySize = 30;
-        this.speed = 10;
+        this.speed = 15;
         this.shot = false;
         this.snd = new Sound("snd/laser.wav");
     }
@@ -114,7 +211,7 @@ class Bullet {
     }
     update() {
         if (this.shot) { this.y -= this.speed; }
-        if (this.y < 0) { this.shot = false; }
+        if (this.y < 0 || this.y > canvas.width) { this.shot = false; }
     }
 }
 class Fireball {
@@ -123,7 +220,7 @@ class Fireball {
         this.y = y;
         this.size = 1;
         this.maxSize = 40;
-        this.direction = 1;
+        this.direction = 2;
         this.exist = false;
         this.colorR = randomize(200, 255);
         this.colorG = randomize(150, 255);
@@ -143,13 +240,13 @@ class Fireball {
         this.colorG = randomize(150, 255);
         this.color = 'rgba(' + this.colorR + ',' + this.colorG + ',' + this.colorB + ',0.8)';
         this.size += this.direction;
-        this.y += 0.5;
-        if (this.size == this.maxSize) { this.direction *= -1; }
+        this.y += 0.1;
+        if (this.size >= this.maxSize) { this.direction *= -1; }
         if (this.size < 0) {
             this.exist = false;
             this.x = 0;
             this.y = 0;
-            this.direction = 1;
+            this.direction = 2;
             this.size = 1;
         }
     }
