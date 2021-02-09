@@ -48,7 +48,7 @@ function isColliding(a, b) {
     //returning if a is colliding with b
     let r = false;
     if ((a.x >= b.x && a.x <= b.x + b.xSize) || (a.x + a.xSize >= b.x && a.x + a.xSize <= b.x + b.xSize)) {
-        if ((a.y >= b.y && a.y <= b.y + b.xSize) || (a.y + a.ySize >= b.y && a.y + a.ySize <= b.y + b.ySize)) {
+        if ((a.y >= b.y && a.y <= b.y + b.ySize) || (a.y + a.ySize >= b.y && a.y + a.ySize <= b.y + b.ySize)) {
             r = true;
         }
     }
@@ -56,7 +56,7 @@ function isColliding(a, b) {
 }
 function randomize(a, b) {
     //returning a random integer between a and b
-    return Math.trunc((Math.random() * (b - a)) + a);
+    return Math.trunc((Math.random() * (b+1 - a)) + a);
 }
 function clearCanvas() {
     //cleaning the canvas
@@ -79,5 +79,25 @@ function Sound(src) {
     }
     this.stop = function () {
         this.sound.pause();
+    }
+}
+function patternSinX(param, num1, num2){ //sinusoidal movement for enemies
+    if (param.xUpdate > num1) {
+        param.xUpdate = num1;
+        param.xDirection *= -1;
+    }   
+    if (param.xUpdate < num2) {
+        param.xUpdate = num2;
+        param.xDirection *= -1;
+    }
+}
+function patternSinY(param, num1, num2){ //sinusoidal movement for enemies
+    if (param.yUpdate > num1) {
+        param.yUpdate = num1;
+        param.yDirection *= -1;
+    }   
+    if (param.yUpdate < num2) {
+        param.yUpdate = num2;
+        param.yDirection *= -1;
     }
 }
