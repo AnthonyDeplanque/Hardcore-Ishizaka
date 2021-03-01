@@ -45,6 +45,10 @@ class Ship {
   draw() {
     context.drawImage(this.img, this.x, this.y);
   }
+  drawHitbox() {
+    context.fillStyle = "rgba(0,255,0,0.5)";
+    context.fillRect(this.x, this.y, this.xSize, this.ySize);
+  }
   update() {
     if (key.left) {
       this.x -= this.speed;
@@ -102,6 +106,10 @@ class EnemyShip {
   }
   draw() {
     context.drawImage(this.img, this.x, this.y);
+  }
+  drawHitbox() {
+    context.fillStyle = "rgba(255,0,0,0.5)";
+    context.fillRect(this.x, this.y, this.xSize, this.ySize);
   }
   update() {
     if (this.y > canvas.height + this.ySize) {
@@ -167,6 +175,10 @@ class BossShip {
   }
   draw() {
     context.drawImage(this.img, this.x, this.y);
+  }
+  drawHitbox() {
+    context.fillStyle = "rgba(255,0,0,0.5)";
+    context.fillRect(this.x, this.y, this.xSize, this.ySize);
   }
   update() {
     if (this.life > 0) {
@@ -264,7 +276,7 @@ class Stars {
   }
 }
 class Bullet {
-  constructor(x, y, xSize, ySize, speed, shot, snd) {
+  constructor(x, y, xSize, ySize, speed, shot, snd, color) {
     this.x = x;
     this.y = y;
     this.xSize = 4;
@@ -272,9 +284,10 @@ class Bullet {
     this.speed = 15;
     this.shot = false;
     this.snd = new Sound("snd/laser.wav");
+    this.color = "red";
   }
   draw() {
-    context.fillStyle = "red";
+    context.fillStyle = this.color;
     context.fillRect(this.x, this.y, this.xSize, this.ySize);
   }
   update() {

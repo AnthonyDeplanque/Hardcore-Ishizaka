@@ -6,12 +6,14 @@ function starsDisplay() {
 }
 function enemyDisplay() {
   for (let i = 0; i < enemy.length; ++i) {
+  //  enemy[i].drawHitbox();
     enemy[i].draw();
     enemy[i].update();
   }
 }
 function heroDisplay() {
   if (blink === false) {
+  //  hero.drawHitbox();
     hero.draw();
     hero.update();
   }

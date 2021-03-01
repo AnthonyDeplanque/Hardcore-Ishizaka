@@ -90,6 +90,7 @@ for (let i = 0; i < maxBullet; ++i) {
 let bulletBoss = [];
 for (let i = 0; i < maxBullet * 2; ++i) {
   bulletBoss[i] = new Bullet();
+  bulletBoss[i].color = "green";
   bulletBoss[i].speed *= -0.5;
 }
 let boss = new BossShip(245, 149, imgBoss, bossLife);
