@@ -261,6 +261,7 @@ function bossDisplay() {
       bossIsShooting();
     }
     boss.draw();
+//    boss.drawHitbox();
     boss.update();
     boss.hpDraw();
     if (isColliding(hero, boss)) {

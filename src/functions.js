@@ -48,12 +48,12 @@ function isColliding(a, b) {
   //returning if a is colliding with b
   let r = false;
   if (
-    (a.x >= b.x && a.x <= b.x + b.xSize) ||
-    (a.x + a.xSize >= b.x && a.x + a.xSize <= b.x + b.xSize)
+    (a.x >= b.x && a.x <= b.x + b.xSizeHitbox) ||
+    (a.x + a.xSizeHitbox >= b.x && a.x + a.xSizeHitbox <= b.x + b.xSizeHitbox)
   ) {
     if (
-      (a.y >= b.y && a.y <= b.y + b.ySize) ||
-      (a.y + a.ySize >= b.y && a.y + a.ySize <= b.y + b.ySize)
+      (a.y >= b.y && a.y <= b.y + b.ySizeHitbox) ||
+      (a.y + a.ySizeHitbox >= b.y && a.y + a.ySizeHitbox <= b.y + b.ySizeHitbox)
     ) {
       r = true;
     }

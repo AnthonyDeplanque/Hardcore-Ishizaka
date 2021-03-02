@@ -39,6 +39,8 @@ class Ship {
     this.y = y;
     this.xSize = 31;
     this.ySize = 31;
+    this.xSizeHitbox = this.xSize;
+    this.ySizeHitbox = this.ySize;
     this.img = imgGood;
     this.speed = 4;
   }
@@ -47,7 +49,7 @@ class Ship {
   }
   drawHitbox() {
     context.fillStyle = "rgba(0,255,0,0.5)";
-    context.fillRect(this.x, this.y, this.xSize, this.ySize);
+    context.fillRect(this.x, this.y, this.xSizeHitbox, this.ySizeHitbox);
   }
   update() {
     if (key.left) {
@@ -82,6 +84,8 @@ class EnemyShip {
     y,
     xSize,
     ySize,
+    xSizeHitbox,
+    ySizeHitbox,
     img,
     xSpeed,
     ySpeed,
@@ -95,6 +99,8 @@ class EnemyShip {
     this.y = y;
     this.xSize = xSize;
     this.ySize = ySize;
+    this.xSizeHitbox = xSize;
+    this.ySizeHitbox = ySize;
     this.img = img;
     this.xSpeed = 10;
     this.ySpeed = 1;
@@ -109,7 +115,7 @@ class EnemyShip {
   }
   drawHitbox() {
     context.fillStyle = "rgba(255,0,0,0.5)";
-    context.fillRect(this.x, this.y, this.xSize, this.ySize);
+    context.fillRect(this.x, this.y, this.xSizeHitbox, this.ySizeHitbox);
   }
   update() {
     if (this.y > canvas.height + this.ySize) {
@@ -145,6 +151,8 @@ class BossShip {
   constructor(
     xSize,
     ySize,
+    xSizeHitbox,
+    ySizeHitbox,
     img,
     life,
     x,
@@ -160,8 +168,10 @@ class BossShip {
   ) {
     this.xSize = xSize;
     this.ySize = ySize;
-    this.img = img;
-    this.life = life;
+    this.xSizeHitbox = xSize;
+    this.ySizeHitbox = ySize - 25;
+    this.img = imgBoss;
+    this.life = bossLife;
     this.x = canvas.width / 2 - this.xSize / 2;
     this.y = 0 - this.ySize / 2;
     this.xSpeed = 10;
@@ -178,7 +188,7 @@ class BossShip {
   }
   drawHitbox() {
     context.fillStyle = "rgba(255,0,0,0.5)";
-    context.fillRect(this.x, this.y, this.xSize, this.ySize);
+    context.fillRect(this.x, this.y, this.xSizeHitbox, this.ySizeHitbox);
   }
   update() {
     if (this.life > 0) {
@@ -281,6 +291,8 @@ class Bullet {
     this.y = y;
     this.xSize = 4;
     this.ySize = 30;
+    this.xSizeHitbox = this.xSize;
+    this.ySizeHitbox = this.ySize;
     this.speed = 15;
     this.shot = false;
     this.snd = new Sound("snd/laser.wav");
