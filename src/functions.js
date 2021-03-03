@@ -110,11 +110,14 @@ function patternSinY(param, num1, num2) {
   }
 }
 function handleStart(e) {
+  //start the touch
   e.preventDefault();
 }
 function handleEnd(e) {
+  //end the touch
   e.preventDefault();
 }
 function handleMove(e) {
+  //touch and move
   e.preventDefault();
 }

@@ -2,6 +2,7 @@
 // draw show the object on the canvas
 // update is updating each parameters of the object
 // We have to call each functions in our gameLoop functionS
+// latest update : hitboxes
 class Position {
   constructor(x, xDirection) {
     this.x = limit;

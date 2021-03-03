@@ -3,6 +3,8 @@
 //     JavaScript Shooter By SETEEMIO      //
 //                                         //
 //*****************************************//
+
+// latest version 03.03.2021
 "use strict";
 let canvas;
 let context;
