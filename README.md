@@ -1,4 +1,4 @@
-# JS-Shooter-2
+# Hardcore-ishizaka
 
 Hi everyone !
 I'm a student in web developpment and I try to make some fun projects.
