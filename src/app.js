@@ -124,12 +124,12 @@ function init() {
   window.requestAnimationFrame(gameLoop);
   document.addEventListener("keydown", keyboardDown);
   document.addEventListener("keyup", keyboardUp);
-  canvas.addEventListener("touchstart", handleStart)
-  canvas.addEventListener("touchend", handleEnd)
-  canvas.addEventListener("touchmove", handleMove)
+//  canvas.addEventListener("touchstart", handleStart)
+//  canvas.addEventListener("touchend", handleEnd)
+//  canvas.addEventListener("touchmove", handleMove)
 }
 function gameLoop(timeStamp) {
-  ++stamp;
+//  ++stamp;
   clearCanvas();
   gameOn = toggleKey(key.enter, gameOn);
   if (gameOn) {

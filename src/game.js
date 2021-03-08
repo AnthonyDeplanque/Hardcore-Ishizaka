@@ -6,14 +6,14 @@ function starsDisplay() {
 }
 function enemyDisplay() {
   for (let i = 0; i < enemy.length; ++i) {
-  //  enemy[i].drawHitbox();
+    //  enemy[i].drawHitbox();
     enemy[i].draw();
     enemy[i].update();
   }
 }
 function heroDisplay() {
   if (blink === false) {
-  //  hero.drawHitbox();
+    //  hero.drawHitbox();
     hero.draw();
     hero.update();
   }
@@ -134,8 +134,8 @@ function explosionShow(param) {
   for (let i = 0; i < explosion.length; ++i) {
     if (explosion[i].exist === false) {
       explosion[i].exist = true;
-      explosion[i].x = param.x + param.xSize / 2;
-      explosion[i].y = param.y + param.ySize / 2;
+      explosion[i].x = randomize(param.x, (param.x + param.xSize));
+      explosion[i].y = randomize(param.y, (param.y + param.ySize));
       explosion[i].snd.play();
       break;
     }
@@ -261,7 +261,7 @@ function bossDisplay() {
       bossIsShooting();
     }
     boss.draw();
-//    boss.drawHitbox(); //permits to show the boss hitbox
+    //    boss.drawHitbox(); //permits to show the boss hitbox
     boss.update();
     boss.hpDraw();
     if (isColliding(hero, boss)) {
@@ -290,15 +290,16 @@ function bossDisplay() {
   }
 }
 function bossDie() {
-  let switchBoom = false;
   if (boss.alive === false) {
     win = true;
-    if (switchBoom === false) {
-      switchboom = true;
-      window.setInterval(function () {
-        switchBoom = false;
+    const hasExplosionRunning = explosion.filter(e => e.exist === true).length > 0;
+    console.log(hasExplosionRunning);
+    if (!hasExplosionRunning) {
+      explosion = [];
+      Array.from({ length: 3 }).forEach(() => {
+        explosion.push(new Fireball());
         explosionShow(boss);
-      }, 100);
+      });
     }
   }
   gameover2.message = "Total Score =" + score;
