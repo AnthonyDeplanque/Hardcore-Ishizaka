@@ -140,7 +140,7 @@ function gameLoop(timeStamp) {
   window.requestAnimationFrame(gameLoop);
 }
 function gameIsOn() {
-//  callOfTheBoss();
+  callOfTheBoss();
   starsDisplay();
   scoreShow();
   livesShow();
@@ -148,7 +148,7 @@ function gameIsOn() {
   heroIsShooting();
   heroDisplay();
   heroTouched();
-//  if (bossDisplayToggle) {
+  if (bossDisplayToggle) {
     bossDisplay();
     if (win) {
       endGameDisplay();
@@ -156,13 +156,13 @@ function gameIsOn() {
         window.location.reload();
       }
     }
-//  } else {
-//    timerBegin();
-//    enemyShot();
-//  }
-//  if (timerForBegin) {
-//    enemyDisplay();
-//  }
+  } else {
+    timerBegin();
+    enemyShot();
+  }
+  if (timerForBegin) {
+    enemyDisplay();
+  }
   explosionDisplay();
   if (lives == 0) {
     gameoverDisplay();

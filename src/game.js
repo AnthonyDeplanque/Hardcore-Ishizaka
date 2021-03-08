@@ -293,7 +293,7 @@ function bossDie() {
   if (boss.alive === false) {
     win = true;
     const hasExplosionRunning = explosion.filter(e => e.exist === true).length > 0;
-    console.log(hasExplosionRunning);
+//    console.log(hasExplosionRunning);
     if (!hasExplosionRunning) {
       explosion = [];
       Array.from({ length: 3 }).forEach(() => {

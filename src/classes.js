@@ -102,7 +102,7 @@ class EnemyShip {
     this.ySize = ySize;
     this.xSizeHitbox = xSize;
     this.ySizeHitbox = ySize;
-    this.img = img;
+    this.img = imgBad;
     this.xSpeed = 10;
     this.ySpeed = 1;
     this.xUpdate = randomize(1, 5);
