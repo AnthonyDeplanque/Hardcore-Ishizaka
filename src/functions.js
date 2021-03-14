@@ -16,7 +16,7 @@ function keyboardDown(e) {
     case 40: //down
       key.down = true;
       break;
-    case 32:
+    case 32: //space
       key.space = true;
       break;
   }
@@ -39,7 +39,7 @@ function keyboardUp(e) {
     case 40: //down
       key.down = false;
       break;
-    case 32:
+    case 32: //space
       key.space = false;
       break;
   }
@@ -60,10 +60,8 @@ function isColliding(a, b) {
   }
   return r;
 }
-function randomize(a, b) {
-  //returning a random integer between a and b
-  return Math.trunc(Math.random() * (b + 1 - a) + a);
-}
+let randomize = (min, max) =>  Math.trunc(Math.random() * (max + 1 - min) + min);
+
 function clearCanvas() {
   //cleaning the canvas
   context.clearRect(0, 0, canvas.width, canvas.height);
