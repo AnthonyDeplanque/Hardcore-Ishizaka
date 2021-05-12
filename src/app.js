@@ -43,7 +43,7 @@ let win = false;
 let key = new Keyboard(); //toggle to know what key you are pressing
 let hero = new Ship(initX, initY); //the player's spaceShip
 const begin1 = new Text(
-	"HardCore Ishizaka",
+	"Destroy Ishizaka",
 	40,
 	"white",
 	canvas.width / 4 + 35,
