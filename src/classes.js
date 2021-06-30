@@ -1,3 +1,4 @@
+
 // each visual object classes contain functions called draw and update
 // draw show the object on the canvas
 // update is updating each parameters of the object
@@ -388,3 +389,4 @@ class Text {
     }
   }
 }
+

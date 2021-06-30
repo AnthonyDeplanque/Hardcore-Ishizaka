@@ -1,3 +1,4 @@
+
 function starsDisplay() {
   for (let i = 0; i < starDust.length; ++i) {
     starDust[i].draw();

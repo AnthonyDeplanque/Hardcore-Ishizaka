@@ -43,81 +43,82 @@ let win = false;
 let key = new Keyboard(); //toggle to know what key you are pressing
 let hero = new Ship(initX, initY); //the player's spaceShip
 const begin1 = new Text(
-  "HardCore Ishizaka",
-  40,
-  "white",
-  canvas.width / 4 + 35,
-  canvas.height / 2 - 40
+	"Destroy Ishizaka",
+	40,
+	"white",
+	canvas.width / 4 + 35,
+	canvas.height / 2 - 40
 );
 const begin2 = new Text(
-  "Press Enter to play",
-  40,
-  "white",
-  canvas.width / 4 + 30,
-  canvas.height / 2 + 40
+	"Press Enter to play",
+	40,
+	"white",
+	canvas.width / 4 + 30,
+	canvas.height / 2 + 40
 );
 const gameover1 = new Text(
-  "You died. Game Over",
-  40,
-  "white",
-  canvas.width / 4,
-  canvas.height / 2
+	"You died. Game Over",
+	40,
+	"white",
+	canvas.width / 4,
+	canvas.height / 2
 );
 let gameover2 = new Text(
-  "",
-  40,
-  "white",
-  canvas.width / 3,
-  canvas.height / 2 + 40
+	"",
+	40,
+	"white",
+	canvas.width / 3,
+	canvas.height / 2 + 40
 );
 const gameover3 = new Text(
-  "Press enter to retry",
-  40,
-  "white",
-  canvas.width / 4,
-  canvas.height / 2 + 80
+	"Press enter to retry",
+	40,
+	"white",
+	canvas.width / 4,
+	canvas.height / 2 + 80
 );
 const win1 = new Text(
-  "You defeated the evil Ishizaka",
-  40,
-  "white",
-  canvas.width / 5,
-  canvas.height / 2
+	"You defeated the evil Ishizaka",
+	40,
+	"white",
+	canvas.width / 5,
+	canvas.height / 2
 );
 
 let bulletFired = []; //array for the bullets fired
 for (let i = 0; i < maxBullet; ++i) {
-  bulletFired[i] = new Bullet();
+	bulletFired[i] = new Bullet();
 }
 let bulletBoss = [];
 for (let i = 0; i < maxBullet * 2; ++i) {
-  bulletBoss[i] = new Bullet();
-  bulletBoss[i].color = "green";
-  bulletBoss[i].speed *= -0.5;
+	bulletBoss[i] = new Bullet();
+	bulletBoss[i].color = "green";
+	bulletBoss[i].speed *= -0.5;
 }
 let boss = new BossShip(245, 149, imgBoss, bossLife);
 let enemy = []; //array for the enemies
 for (let i = 0; i < maxEnemies; ++i) {
-  enemy[i] = new EnemyShip(
-    randomize(limit, canvas.width - limit),
-    0,
-    29,
-    30,
-    imgBad
-  );
+	enemy[i] = new EnemyShip(
+		randomize(limit, canvas.width - limit),
+		0,
+		29,
+		30,
+		imgBad
+	);
 }
 let starDust = []; //array for the stars in the background
 for (let i = 0; i < randomize(200, 255); ++i) {
-  starDust[i] = new Stars(
-    randomize(1, canvas.width),
-    randomize(1, canvas.height)
-  );
+	starDust[i] = new Stars(
+		randomize(1, canvas.width),
+		randomize(1, canvas.height)
+	);
 }
 let explosion = []; //array for the explosions when an enemy is destroyed
 for (let i = 0; i < maxEnemies * maxEnemies; ++i) {
-  explosion[i] = new Fireball();
+	explosion[i] = new Fireball();
 }
 function init() {
+
   // Get a reference to the canvas
   canvas = document.getElementById("canvas");
   context = canvas.getContext("2d");
@@ -170,4 +171,5 @@ function gameIsOn() {
       window.location.reload();
     }
   }
+
 }
