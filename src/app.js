@@ -118,56 +118,58 @@ for (let i = 0; i < maxEnemies * maxEnemies; ++i) {
 	explosion[i] = new Fireball();
 }
 function init() {
-	// Get a reference to the canvas
-	canvas = document.getElementById("canvas");
-	context = canvas.getContext("2d");
-	window.requestAnimationFrame(gameLoop);
-	document.addEventListener("keydown", keyboardDown);
-	document.addEventListener("keyup", keyboardUp);
-	canvas.addEventListener("touchstart", handleStart)
-	canvas.addEventListener("touchend", handleEnd)
-	canvas.addEventListener("touchmove", handleMove)
+
+  // Get a reference to the canvas
+  canvas = document.getElementById("canvas");
+  context = canvas.getContext("2d");
+  window.requestAnimationFrame(gameLoop);
+  document.addEventListener("keydown", keyboardDown);
+  document.addEventListener("keyup", keyboardUp);
+//  canvas.addEventListener("touchstart", handleStart)
+//  canvas.addEventListener("touchend", handleEnd)
+//  canvas.addEventListener("touchmove", handleMove)
 }
 function gameLoop(timeStamp) {
-	++stamp;
-	clearCanvas();
-	gameOn = toggleKey(key.enter, gameOn);
-	if (gameOn) {
-		gameIsOn();
-	} else {
-		beginDisplay();
-	}
-	window.requestAnimationFrame(gameLoop);
+//  ++stamp;
+  clearCanvas();
+  gameOn = toggleKey(key.enter, gameOn);
+  if (gameOn) {
+    gameIsOn();
+  } else {
+    beginDisplay();
+  }
+  window.requestAnimationFrame(gameLoop);
 }
 function gameIsOn() {
-	//  callOfTheBoss();
-	starsDisplay();
-	scoreShow();
-	livesShow();
-	xEnemyCreation.update();
-	heroIsShooting();
-	heroDisplay();
-	heroTouched();
-	//  if (bossDisplayToggle) {
-	bossDisplay();
-	if (win) {
-		endGameDisplay();
-		if (key.enter) {
-			window.location.reload();
-		}
-	}
-	//  } else {
-	//    timerBegin();
-	//    enemyShot();
-	//  }
-	//  if (timerForBegin) {
-	//    enemyDisplay();
-	//  }
-	explosionDisplay();
-	if (lives == 0) {
-		gameoverDisplay();
-		if (key.enter) {
-			window.location.reload();
-		}
-	}
+  callOfTheBoss();
+  starsDisplay();
+  scoreShow();
+  livesShow();
+  xEnemyCreation.update();
+  heroIsShooting();
+  heroDisplay();
+  heroTouched();
+  if (bossDisplayToggle) {
+    bossDisplay();
+    if (win) {
+      endGameDisplay();
+      if (key.enter) {
+        window.location.reload();
+      }
+    }
+  } else {
+    timerBegin();
+    enemyShot();
+  }
+  if (timerForBegin) {
+    enemyDisplay();
+  }
+  explosionDisplay();
+  if (lives == 0) {
+    gameoverDisplay();
+    if (key.enter) {
+      window.location.reload();
+    }
+  }
+
 }
